@@ -43,4 +43,4 @@ elif guess != number:
     print("The number was: ", number)
     history.append(number)
 
-write_history(file_path, history)
+    write_history(file_path, history)
