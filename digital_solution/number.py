@@ -10,9 +10,14 @@ import random
 import os
 number = random.randint(1, 100)
 guess = 0
-time = 0
-file_path = "digital_solution/number.txt"
+attempt = 0
+max_attempt = 10
+file_path = "number.txt"
 history = []
+low = 1
+high = 100
+trys = 0
+
 
 def read_history(file_path):
     if os.path.exists(file_path):
@@ -21,26 +26,41 @@ def read_history(file_path):
     return []
 def write_history(file_path, history):
     with open(file_path, "w") as file:
-        for numbers in history:
-            file.write(f"{numbers}\n")
+        for entry in history:
+            file.write(f"{entry}\n")
 
-while guess != number and time <= 10:
-    guess = input("Guess the number: ")
-    if guess.isdigit():
-        guess = int(guess)
-        if guess > number:
-            print("Too high")
-            time = time + 1
-        elif guess < number:
-            print("Too low")
-            time = time + 1
+history = read_history(file_path)
 
-if guess == number:
-    print("You win!")
-    history.append(number)
-elif guess != number:
+while attempt < max_attempt:
+    try:
+        tips = random.randint(low, high)
+        guess = input(f"Attempt: {attempt +1} Guess the number(Try:{tips}): ")
+        if guess.isdigit():
+            guess = int(guess)
+            attempt += 1
+            if guess > number:
+                print("Too high")
+                high = guess - 1
+            elif guess < number:
+                print("Too low")
+                low = guess + 1
+            else:
+                print("You win!")
+                history.append(f"Win: {trys + 1}")
+                write_history(file_path, history)
+                break
+        else:
+            print("Please enter a valid number")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
+
+if guess != number:
     print("Game over!")
-    print("The number was: ", number)
-    history.append(number)
-
+    print(f"The number was:{number}")
+    history.append(f"Lose: {trys + 1}")
     write_history(file_path, history)
+
+print('\ngame over:')
+for entry in history:
+    print(entry)
