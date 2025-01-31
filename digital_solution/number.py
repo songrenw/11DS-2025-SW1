@@ -28,13 +28,17 @@ def write_history(file_path, history):
     with open(file_path, "w") as file:
         for entry in history:
             file.write(f"{entry}\n")
+def tips(low, high):
+    if high == low:
+        return high
+    return (high + low) //2
 
 history = read_history(file_path)
 
 while attempt < max_attempt:
     try:
-        tips = random.randint(low, high)
-        guess = input(f"Attempt: {attempt +1} Guess the number(Try:{tips}): ")
+        tip = tips(low, high)
+        guess = input(f"Attempt: {attempt +1} Guess the number(Try:{tip}): ")
         if guess.isdigit():
             guess = int(guess)
             attempt += 1
