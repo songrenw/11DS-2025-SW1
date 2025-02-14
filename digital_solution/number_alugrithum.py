@@ -15,15 +15,18 @@
 # simulate the game using the alugrithum in while try is less than 1000
 # bot can simulate the game using the alugrithum(if it too high, the mximum become high, if it too low, the minimum become low and divided by half to guess the next number)
 # insert the number and the attempt into the database of the bot
+#lambda function is used to calculate the average of the number of attempts to guess the number
+#what diffrent between dict, list, and tuple
 import random
 import sqlite3
 
-number = random.randint(1, 100)
+number = 100
 guess = 0
 attempt = 0
 low = 1
 high = 100
 simulation_time = 1000
+
 
 
 
@@ -61,7 +64,7 @@ def gameover():
     print('game over:')
     conn = sqlite3.connect('number.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT number, attempt FROM users')
+    cursor.execute('SELECT number, attempt FROM algorithm')
     datas = cursor.fetchall()
     if datas:
         for data in datas:
@@ -82,27 +85,39 @@ def simulation_guess(low, high):
     return midpoint + range_adjusted
 
 def simulation(low, high):
-    number = random.randint(1, 100) # generate a new random number every time this function is called
+    number = 100 # generate a new random number every time this function is called
     attempt = 1
     while True:
         simulated_guess = simulation_guess(low, high)
+        number_list = [simulated_guess]
+        print(number_list, end=" ")
         if simulated_guess > number:
             high = simulated_guess - 1
             attempt += 1
+
         elif simulated_guess < number:
             low = simulated_guess + 1
             attempt += 1
+
         else:
-            print(f"Simulated number: {number}, Simulated attempts: {attempt}")
+
+            print(f"\nSimulated number: {number}, Simulated attempts: {attempt}")
             insert_db(number, attempt)
             return
 
 
-
 init_db()
 print("\033[94mWelcome to the number guessing game. You have to guess a number between 1 and 100\033[0m")
+clear = input("Do you want to clear the game history? (y/n): ").lower()
+if clear == "y":
+    conn = sqlite3.connect('number.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM algorithm')
+    conn.commit()
+    conn.close()
+    print("Game history cleared")
 
-chose = input("Do you want to simulate the game using algorithm?(y/n):")
+chose = input("Do you want to simulate the game using algorithm?(y/n):").lower()
 if chose == "y":
     while simulation_time:
         simulation_time = input("How many time would you like to simulate: ")
@@ -111,15 +126,8 @@ if chose == "y":
             while simulation_time > 0:
                 simulation(low, high)
                 simulation_time -= 1
-            else:
-                again = input("Would you like to simulate again? (y/n): ")
-                if again == "y":
-                    simulation_time = input("How many time would you like to simulate: ")
-                elif again == "n":
-                    break
-                else:
-                    print("Please enter a valid input")
-        elif not simulation_time.isdigit():
+
+        else:
             print("Please enter a valid number")
 
 elif chose == "n":
