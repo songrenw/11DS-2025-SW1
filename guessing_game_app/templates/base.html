@@ -7,89 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../static/style.css">
 
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
   </head>
-
-  <body class="w3-white"> <!-- set the background of the webite as white -->
-  <!-- style sheet that is used throughout the website -->
-  <style>
-
-.button {
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-
-.button {
-  background-color: black;
-  color: white;
-  border: 3px solid rgba(0, 0, 0, 0.75);
-    border-radius: 12px;
-}
-
-.button:hover {
-  background-color: white;
-  color: black;
-}
-form {
-  margin-bottom: 10px;
-  margin-right: 10px;
-  margin-left: 10px;}
-.input {
-  background-color: #ffffff;
-  color: #000000;
-  border: 2px solid rgba(0, 0, 0, 0.75);
-    border-radius: 6px;
-    margin: 4px 2px;
-}
-.input:hover {
-  background-color: rgba(255, 255, 255, 0.49);
-  color: black;
-}
-
-
-
-</style>
-<div class="w3-sidebar w3-bar-block w3-dark-grey w3-round w3-animate-left" style='display:none' id="sidebar">
-    <button class="w3-bar-item w3-button w3-large"
-            onclick="sbclose()"><i class="material-icons">menu</i></button>
-    <a href="/" class="w3-bar-item w3-button">
+<body>
+<div class="view">
+    <div class="tab" id="sidebar">
+    <a href="/" class="button">
         <i class="material-icons">home</i>
         Home
     </a>
-
-</div>
-<div>
-    <button class="w3-button w3-xlarge" onclick="sbopen()"><i class="material-icons">menu</i></button>
     </div>
-<!-- javascript for open and close the sidebar reference: https://www.w3schools.com/w3css/w3css_sidebar.asp -->
-<script>
-function sbopen() {
-    document.getElementById("sidebar").style.display = "block";
-}
-function sbclose() {
-    document.getElementById("sidebar").style.display = "none";
-}
-</script>
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer" class="w3-center w3-round w3-display-bottommiddle">
-        </div>
+   <!-- set the background of the webite as white -->
+  <!-- style sheet that is used throughout the website -->
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
 
+    <div id="footer" class="w3-center w3-round w3-display-bottommiddle">
         {% block footer %}
-      &copy; Copyright 2024 by <a href="/">Song-Ren Wang</a>. <!-- footer that is shown in all html file, showing copyiright text-->
+      &copy; Copyright 2025 by <a href="/copyright">Song-Ren Wang</a>. <!-- footer that is shown in all html file, showing copyiright text-->
       {% endblock %}
   </div>
-
+  </div>
   </body>
 
 </html>

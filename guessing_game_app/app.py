@@ -46,6 +46,8 @@ def home():
 
     # For GET requests, display the default page
     return render_template('index.html')
-
+@app.route("/copyright", methods=["GET"])
+def copyright():
+    return render_template('copyright.html')
 if __name__ == "__main__":
     app.run(debug=True) # run the flask app in debug mode
