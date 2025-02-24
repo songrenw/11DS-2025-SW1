@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<h1>Enter your username</h1>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+<form action="/" method="POST">
+    <input class="input" type="text" name="username" id="username"  required>
+    <input class="input" type="password" name="password" id="password" required>
+    <button type="submit" class="button">Enter</button>
+</form>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <p style="color: #ffffff;">{{ message }}</p>
+                {% endfor %}
+            </div>
+    {% endif %}
+{% endwith %}
+{% endblock %}

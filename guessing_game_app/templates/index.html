@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Number guessing game{% endblock %}
 {% block content %}
-<style></style>
+<h1><b> Hello {{ user }},</b></h1>
 <h1>Number Guessing Game</h1>
 {% if message %} <!-- this is jinja2 syntax -->
     <p>{{ message }}</p>
@@ -15,13 +15,13 @@
     <p>It took you {{ attempts }} attempts to guess the number {{ number }}</p>
 {% endif %}
 {% if not game_over %}
-<form action="/" method="POST">
+<form action="/home" method="POST">
     <label for="guess">Enter your guess:</label>
     <input type="number" id="guess" min="1" max="100" class="input" name="guess" required>
     <button type="submit" class="button">Enter</button>
 </form>
 {% else %}
-<form action='/' method="POST">
+<form action='/home' method="POST">
     <button type="submit" class="button" name="play_again">Play Again</button>
 </form>
 {% endif %}
