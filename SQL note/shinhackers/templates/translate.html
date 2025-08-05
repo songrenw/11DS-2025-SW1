@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block title %}Translate{% endblock %}
+{% block content %}
+<h1>Translate into everyday english</h1>
+<a class= button href="/">Back to home</a>
+<div class="table">
+<ul><li><h2>a</h2></li></ul>
+    <pre>SELECT * FROM Games WHERE Month = 4</pre>
+    <table>
+    <tr>
+        <th>Day</th>
+        <th>Month</th>
+        <th>Team</th>
+        <th>Ours</th>
+        <th>Theirs</th>
+    </tr>
+    {% for row in a %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+    </tr>
+    {% endfor %}
+        </table>
+    <p><b>Select all(Day, Month, Team, Ours, Their) where month is April</b></p>
+<ul><li><h2>b</h2></li></ul>
+    <pre>SELECT Team FROM Games WHERE Ours > Theirs</pre>
+    <table>
+    <tr>
+        <th>Team</th>
+        <th>Ours</th>
+        <th>Theirs</th>
+    </tr>
+    {% for row in b %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+    </tr>
+    {% endfor %}
+        </table>
+    <p><b>Select Team where our point is bigger than their</b></p>
+
+    <ul><li><h2>c</h2></li></ul>
+    <pre>SELECT * FROM Games</pre>
+    <table>
+    <tr>
+        <th>Day</th>
+        <th>Month</th>
+        <th>Team</th>
+        <th>Ours</th>
+        <th>Theirs</th>
+    </tr>
+    {% for row in c %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+    </tr>
+    {% endfor %}
+        </table>
+    <p><b>Select everything from games table</b></p>
+
+    <ul><li><h2>d</h2></li></ul>
+    <pre>SELECT Day, Month, Team FROM Games WHERE Ours > Theirs AND Month = 5</pre>
+
+    {{ d }}
+
+    <p><b>Select column for day, month and team from game table where our point is more than theirs and is in May</b></p>
+
+    <ul><li><h2>e</h2></li></ul>
+    <pre>SELECT * FROM Games</pre>
+    <table>
+    <tr>
+        <th>Day</th>
+        <th>Month</th>
+        <th>Team</th>
+        <th>Ours</th>
+        <th>Theirs</th>
+    </tr>
+    {% for row in c %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+    </tr>
+    {% endfor %}
+        </table>
+    <p><b>Select everything from games table</b></p>
+    <ul><li><h2>f</h2></li></ul>
+    <pre>SELECT COUNT(*) FROM Games WHERE Ours > Theirs</pre>
+    {{ f }}
+    <p><b>Count the number of games where our point is more than theirs</b></p>
+
+    <ul><li><h2>g</h2></li></ul>
+    <pre>SELECT MAX(Ours-Theirs) FROM Games</pre>
+    {{ g }}
+    <p><b>Find the maximum difference between our point and their point</b></p>
+
+    <ul><li><h2>h</h2></li></ul>
+    <pre>SELECT * FROM Games ORDER BY Month, Day</pre>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Month</th>
+            <th>Team</th>
+            <th>Ours</th>
+            <th>Theirs</th>
+        </tr>
+    {% for row in h %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+    </tr>
+        {% endfor %}
+    </table>
+    <p><b>Select everything from games table and order by day and month(acending)</b></p>
+</div>
+
+
+{% endblock %}
